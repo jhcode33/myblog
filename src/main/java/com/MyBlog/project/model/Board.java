@@ -1,5 +1,8 @@
 package com.MyBlog.project.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,8 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.MyBlog.project.dto.BoardDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -46,6 +52,13 @@ public class Board extends BaseTimeEntity{
     @JoinColumn(name = "userId") //DB상 필드값은 userId로 설정
     private User user;
 	
+	@OneToMany(mappedBy = "board",
+			   fetch = FetchType.EAGER,
+			   cascade = CascadeType.REMOVE) //게시판 삭제시 댓글도 같이 삭제.
+	@JsonIgnoreProperties({"board"})
+	@OrderBy("id desc")
+	private List<Reply> replyList;
+	
 	public void updateBoard(String title, String content, String category) {
 		this.title = title;
 		this.content = content;
@@ -60,6 +73,7 @@ public class Board extends BaseTimeEntity{
                 .category(category)
                 .views(views)
                 .user(user)
+                .replyList(replyList)
                 .build();
 	}
 }

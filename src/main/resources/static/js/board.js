@@ -71,7 +71,7 @@ let index = {
             category: $("#category").val(),
         }
         $.ajax({
-            type: "PUT",
+            type: "POST",
             url: "/api/board/" + id,
             data: JSON.stringify(data), //http body 데이터
             contentType: "application/json; charset=utf-8",

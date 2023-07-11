@@ -31,7 +31,7 @@ public class BoardController {
 		return "index";
 	}
 	
-	//== admin ==//
+	//== 일상보기 ==//
 	@GetMapping("/board/daily")
 	public String dailyList(Model model,@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		Page<Board> daily = boardService.categoryList(pageable, "daily");
@@ -39,7 +39,7 @@ public class BoardController {
 		return "category/daily";
 	}
 	
-	//== admin ==//
+	//== 무슨보기 ==//
 	@GetMapping("/board/knowledge")
     public String knowledgeList(Model model, @PageableDefault(size = 5, sort = "id",
             direction = Sort.Direction.DESC) Pageable pageable) {

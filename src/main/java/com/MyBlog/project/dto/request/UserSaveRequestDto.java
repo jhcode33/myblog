@@ -2,16 +2,19 @@ package com.MyBlog.project.dto.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.MyBlog.project.model.RoleType;
 import com.MyBlog.project.model.User;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserSaveRequestDto {
     @NotBlank
     @Size(min = 4, max = 12)
@@ -30,9 +33,6 @@ public class UserSaveRequestDto {
     //@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "이메일 형식에 맞지 않습니다.")
     private String email;
     private RoleType role;
-	
-    //디폴트 생성자가 있어야지 바인딩 되는데 원래 코드에는 없음....
-    public UserSaveRequestDto() {};
     
 	@Builder
 	public UserSaveRequestDto(String username, String password, String email, RoleType roleType) {

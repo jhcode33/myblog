@@ -4,6 +4,15 @@
 
 <head>
     <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+    
+    <style type="text/css">
+    	textarea{
+    		width: 100%;
+    		height: 6.25em;
+		    border: none;
+		    resize: none;
+    	}
+    </style>
 </head>
 
 <!--<sec:authorize access="isAuthenticated()">-->
@@ -46,7 +55,7 @@
         <th>글 번호</th><td><span th:text="${board.id}"></span></td>
     </tr>
     <tr>
-        <th>작성자</th><td><span><b><i th:text="${board.getUser().getUsername()}"></i></b></span></td>
+        <th>작성자</th><td><span><b><i th:text="${board.getUser().getEmail()}"></i></b></span></td>
     </tr>
     <tr>
         <th>카테고리</th><td><span th:text="${board.getCategory()}"></span></td>
@@ -57,31 +66,33 @@
 	</table>
 	<br>
 	
-	<div class="container border p-3">
-		<div class="form-group">
-	        <h3 class="title">제목 : <span th:text="${board.title}"></span></h3>
-		</div>
-	    <div class="form-group">
-	        <div class="content" th:utext="${board.content}"></div>
-	    </div>
+	<div class="card">
+		<div class="card-header">제목 : <span th:text="${board.title}"></span></div>
+			<div class="container border p-3">
+			    <div class="form-group">
+			        <div class="content" th:utext="${board.content}"></div>
+			    </div>
+			</div>
 	</div>
 
-
-
-<!--        댓글     
+	<!-- 댓글 -->
+	<br>
+	<br>
+	
     <div class="card">
+    	<div class="card-header">댓글 달기</div>
         <form>
-            <input type="hidden" id="boardId" th:value="${board.id}">
-            <div class="card-body">
-                <textarea id="reply-content" class="form-control" rows="1"></textarea>
-            </div>
-            <div class="card-footer">
-                <button type="button" id="btn-reply-save" class="btn btn-primary">등록</button>
-            </div>
+          <input type="hidden" id="boardId" th:value="${board.id}">
+          <div class="card-body">
+		    <div class="input-group" id="replyCss">
+		      <textarea id="reply-content" class="form-control" rows="1"></textarea>
+		  	  <button type="button" id="btn-reply-save" class="btn btn-primary">등록</button>
+		    </div>
+		  </div>
         </form>
     </div>
     <br>
-
+    
     <div class="card">
         <div class="card-header">댓글 리스트</div>
         <ul th:each="reply : ${board.replyList}" id="reply-box" class="list-group">
@@ -102,7 +113,7 @@
                 <div th:utext="${reply.content}">댓글 내용</div>
             </li>
         </ul>
-    </div> -->
+    </div>
 </div>
 
 

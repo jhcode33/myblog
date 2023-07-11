@@ -1,5 +1,7 @@
 package com.MyBlog.project.controller.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,17 +25,30 @@ public class BoardApiController {
 	private final BoardService boardService;
 
 	@PostMapping("/api/board")
-	public ResponseEntity write(@RequestBody BoardDto boardDto, @AuthenticationPrincipal PrincipalDetails principalDetails ) {
+	public ResponseEntity<Long> write(@RequestBody BoardDto boardDto, @AuthenticationPrincipal PrincipalDetails principalDetails ) {
 		return ResponseEntity.ok(boardService.write(boardDto, principalDetails.getUser()));
 	}
 	
     @GetMapping("/api/board/{id}")
-    public ResponseEntity findById(@PathVariable Long id) {
+    public ResponseEntity<BoardDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(boardService.findById(id));
     }
     @GetMapping("/api/boards")
-    public ResponseEntity findAll() {
+    public ResponseEntity<List<BoardDto>> findAll() {
         return ResponseEntity.ok(boardService.findAll());
+    }
+    
+    @PostMapping("/api/board/{id}")
+    public ResponseEntity<Long> delete(@PathVariable Long id) {
+    	boardService.delete(id);
+    	return  ResponseEntity.ok(id);
+    }
+    
+    @PostMapping("/api/board/{id}")
+    public ResponseEntity<Long> update(@PathVariable Long id, @RequestBody BoardDto requestBoardDto) {
+    	boardService.update(id, requestBoardDto);
+    	return ResponseEntity.ok(id);
+    	
     }
 
 }

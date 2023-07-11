@@ -76,6 +76,8 @@ public class BoardService {
 	}
 	
 	//게시물 업데이트
+	//하나의 트랜잭션으로 관리가 되며, findById() 메소드를 통해 board 객체는 영속성 컨텍스트가 관리하는 엔티티 객체가 된다.
+	//따라서 update() 메소드가 종료될 때 변경 사항을 DB에 모두 반영할 수 있는 것
 	@Transactional
 	public void update(Long id, BoardDto requestBoardDto) {
 		Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("글을 찾을 수 없습니다."));

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.MyBlog.project.dto.ResponseDto;
-import com.MyBlog.project.dto.request.UserLoginRequestDto;
 import com.MyBlog.project.dto.request.UserSaveRequestDto;
 import com.MyBlog.project.dto.request.UserUpdateDto;
 import com.MyBlog.project.model.RoleType;
