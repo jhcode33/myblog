@@ -33,18 +33,19 @@ public class BoardApiController {
     public ResponseEntity<BoardDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(boardService.findById(id));
     }
+    
     @GetMapping("/api/boards")
     public ResponseEntity<List<BoardDto>> findAll() {
         return ResponseEntity.ok(boardService.findAll());
     }
     
-    @PostMapping("/api/board/{id}")
+    @PostMapping("/api/board/delete{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
     	boardService.delete(id);
     	return  ResponseEntity.ok(id);
     }
     
-    @PostMapping("/api/board/{id}")
+    @PostMapping("/api/board/update/{id}")
     public ResponseEntity<Long> update(@PathVariable Long id, @RequestBody BoardDto requestBoardDto) {
     	boardService.update(id, requestBoardDto);
     	return ResponseEntity.ok(id);

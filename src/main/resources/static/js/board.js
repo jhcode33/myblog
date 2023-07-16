@@ -52,8 +52,8 @@ let index = {
         // console.log(id);
 
         $.ajax({
-            type: "DELETE",
-            url: "/api/board/" + id,
+            type: "POST",
+            url: "/api/board/delete" + id,
             dataType: "json"//서버에서 어떤 타입을 받을 것인지를 의미 (요청이 서버로 응답이 왔을 때,javascript 오브젝트로 변경)
         }).done(function (res) {
             alert("글이 삭제되었습니다!!🎉")
@@ -72,7 +72,7 @@ let index = {
         }
         $.ajax({
             type: "POST",
-            url: "/api/board/" + id,
+            url: "/api/board/update/" + id,
             data: JSON.stringify(data), //http body 데이터
             contentType: "application/json; charset=utf-8",
             dataType: "json"
