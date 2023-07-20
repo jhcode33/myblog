@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
 <div th:fragment="fragment-nav">
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	    setInterval(currentTime, 1000);
+	    currentTime();
+	});  
+</script>
+
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <a class="navbar-brand" href="/">Welcome My Blog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -76,6 +83,12 @@
                 </li>
             </ul>
         </div>
+        
+        <!-- 현재 시간 표시 -->
+        <div class="navbar-brand ml-auto">
+       	 	<p style="color: white; padding-bottom: 0; margin-bottom: 0;">현재 시각 : <span id="current"></span></p>
+    	</div>
+        
     </nav>
     <br>
 </div>
